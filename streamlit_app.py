@@ -200,7 +200,7 @@ if st.session_state.query_list:
                 query_links = sorted(st.session_state.search_results[query], key=lambda x: link_counts[x], reverse=True)
                 link_text = "\n".join(query_links)
                 
-                col1, col2 = st.columns([4, 1]) 
+                col1, col2 = st.columns([2, 1]) 
                 with col1:
                     st.markdown(f"### {query}")
                 with col2:
@@ -211,8 +211,7 @@ if st.session_state.query_list:
                     if link in intersecting_links:
                         rgb = link_colors[link]
                         color = f"background-color: rgba({int(rgb[0] * 255)}, {int(rgb[1] * 255)}, {int(rgb[2] * 255)}, 0.3);"
-                    short_link = link if len(link) <= 50 else link[:38] + "..."
-                    st.markdown(f"<div style='{color} padding: 5px; border-radius: 5px;'><a href='{link}' target='_blank'>{short_link}</a></div>", unsafe_allow_html=True)
+                    st.markdown(f"<div style='{color} padding: 5px; border-radius: 5px;'><a href='{link}' target='_blank' style='max-width: 90%; white-space: nowrap; overflow: hidden;text-overflow: ellipsis; display: inline-block;'>{link}</a></div>", unsafe_allow_html=True)
 
 
 if st.session_state.query_list:
@@ -221,7 +220,7 @@ if st.session_state.query_list:
     top_10_links = sorted_links[:10]
     top_10_text = "\n".join([link for link, count in top_10_links])
 
-    col3, col4 = st.columns([5, 1]) 
+    col3, col4 = st.columns([2, 1]) 
     with col3:
         st.subheader("📊 Most Frequent Links")
         
@@ -229,7 +228,7 @@ if st.session_state.query_list:
         copy_to_clipboard("copy_top_10", top_10_text)
 
     for link, count in top_10_links:
-        if link in link_colors:  # если для ссылки задан цвет
+        if link in link_colors: 
             rgb = link_colors[link]
             bg_color = f"rgba({int(rgb[0] * 255)}, {int(rgb[1] * 255)}, {int(rgb[2] * 255)}, 0.3)"
         else:
@@ -237,7 +236,7 @@ if st.session_state.query_list:
             
         st.markdown(f"""<div style='padding: 5px; max-width: 91.5%; border-radius: 5px; font-weight: bold; background-color: {bg_color}; padding: 8px; margin: 5px 0; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);'>
                             <span style='color: #ff5733; font-size: 16px; margin-right: 8px;'>{count}</span>
-                            <a href='{link}' target='_blank' style='text-decoration: none; font-weight: bold; color: #007bff;'>{link}</a>
+                            <a href='{link}' target='_blank' style='text-decoration: none; font-weight: bold; color: #007bff; max-width: 90%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;'>{link}</a>
                         </div>""", unsafe_allow_html=True)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -323,7 +322,7 @@ if len(st.session_state.query_list) > 1:
         
         query_links_copy = sorted(common_links)
         link_text_copy = "\n".join(query_links_copy)
-        col3, col4 = st.columns([3, 1]) 
+        col3, col4 = st.columns([2, 1]) 
         with col3:
             st.subheader("Common Links for Selected Queries")
         with col4:
@@ -338,13 +337,12 @@ if len(st.session_state.query_list) > 1:
             st.write(f"🔄 Similarity Percentage: {similarity_percentage:.2f}%")
 
             for link in sorted(common_links):
-                short_link = link if len(link) <= 60 else link[:50] + "..."
                 st.markdown(
                     f"""
                     <div style="background-color: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 8px; 
                                 box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
                         <a href="{link}" target="_blank" title="{link}" 
-                            style="text-decoration: none; font-weight: bold; color: #007bff;">{short_link}</a>
+                            style="text-decoration: none; font-weight: bold; color: #007bff; max-width: 90%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block;">{link}</a>
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -352,4 +350,3 @@ if len(st.session_state.query_list) > 1:
             
         else:
             st.write("No links found for all selected queries.")
-
