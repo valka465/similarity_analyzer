@@ -45,7 +45,8 @@ if "show_api_key" not in st.session_state:
 if st.button("Show/Hide API Key"):
     st.session_state.show_api_key = not st.session_state.show_api_key
     
-api_key = st.text_input("Enter [HasData's](https://app.hasdata.com/sign-up&utm_source=streamlit) API key", type="default" if st.session_state.show_api_key else "password", help="Get your API key from HasData at [hasdata.com](https://app.hasdata.com/sign-up&utm_source=streamlit). It's free.")
+api_key = st.text_input("Enter [HasData's](https://app.hasdata.com/sign-up&utm_source=streamlit) API key", type="password", 
+                        help="Get your API key from HasData at [hasdata.com](https://app.hasdata.com/sign-up&utm_source=streamlit). It's free.")
 
 countries = {
     "us": "United States","af": "Afghanistan", "al": "Albania", "dz": "Algeria", "as": "American Samoa",
