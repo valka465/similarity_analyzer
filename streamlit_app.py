@@ -39,6 +39,14 @@ st.set_page_config(page_title="Google Keyword Similarity Analyzer", layout="wide
 st.title("🔍 Google Keyword Similarity Analyzer")
 st.write("Analyze the similarity of Google search queries with filtering by country and language")
 
+st.markdown("""
+    <script>
+    document.querySelectorAll('input[type="password"]').forEach(el => {
+        el.setAttribute('autocomplete', 'off');
+    });
+    </script>
+""", unsafe_allow_html=True)
+
 api_key = st.text_input("Enter [HasData's](https://app.hasdata.com/sign-up&utm_source=streamlit) API key", type="password", 
                         help="Get your API key from HasData at [hasdata.com](https://app.hasdata.com/sign-up&utm_source=streamlit). It's free.")
 
