@@ -39,6 +39,12 @@ st.set_page_config(page_title="Google Keyword Similarity Analyzer", layout="wide
 st.title("🔍 Google Keyword Similarity Analyzer")
 st.write("Analyze the similarity of Google search queries with filtering by country and language")
 
+if "show_api_key" not in st.session_state:
+    st.session_state.show_api_key = False
+
+if st.button("Show/Hide API Key"):
+    st.session_state.show_api_key = not st.session_state.show_api_key
+    
 api_key = st.text_input("Enter [HasData's](https://app.hasdata.com/sign-up&utm_source=streamlit) API key", type="default" if st.session_state.show_api_key else "password", help="Get your API key from HasData at [hasdata.com](https://app.hasdata.com/sign-up&utm_source=streamlit). It's free.")
 
 countries = {
